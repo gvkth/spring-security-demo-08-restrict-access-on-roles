@@ -19,6 +19,15 @@
 	
 	<label>Role(s): </label><span><security:authentication property="principal.authorities" /></span>
 	</p>
+	
+	<hr>
+	
+		
+	
+		<a href="${pageContext.request.contextPath}/leaders">Leadership Meeting</a>
+		<span>(Only for Manager peeps)</span>
+	<hr>
+
 	<!--  Add a logout button -->
 	<form:form action="${pageContext.request.contextPath}/logout"
 	method="POST">

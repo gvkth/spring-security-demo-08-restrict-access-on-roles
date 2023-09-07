@@ -21,13 +21,16 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		auth.inMemoryAuthentication()
 			.withUser(users.username("john").password("test123").roles("EMPLOYEE"))
-			.withUser(users.username("mary").password("test123").roles("EMPLOYEE","MANAGER"))
+			.withUser(users.username("mary").password("test123").roles("EMPLOYEE","MANAGERS"))
 			.withUser(users.username("susan").password("test123").roles("EMPLOYEE","ADMIN"));
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()//we're going to restrict access based on the HttpServletRequest coming in
+			.antMatchers("/").hasRole("EMPLOYEE")
+			.antMatchers("/leaders/**").hasRole("MANAGERS")
+			.antMatchers("/systems/**").hasRole("ADMIN")
 			.antMatchers("/css/**").permitAll() //enable static resources loaded without authentication
 			.anyRequest().authenticated() //any request to the app must be authenticated (ie logged in)
 			.and().formLogin()
