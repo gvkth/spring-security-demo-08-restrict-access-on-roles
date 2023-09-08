@@ -23,9 +23,17 @@
 	<hr>
 	
 		
-	
+		<security:authorize access="hasRole('MANAGERS')">
 		<a href="${pageContext.request.contextPath}/leaders">Leadership Meeting</a>
 		<span>(Only for Manager peeps)</span>
+		</security:authorize>
+		
+		
+		<!--  Add a link to point to /systems... this is for the admins -->
+		<security:authorize access="hasRole('ADMIN')">
+		<a href="${pageContext.request.contextPath}/systems">IT Systems Meeting</a>
+		<span>(Only for ITs)</span>
+		</security:authorize>
 	<hr>
 
 	<!--  Add a logout button -->

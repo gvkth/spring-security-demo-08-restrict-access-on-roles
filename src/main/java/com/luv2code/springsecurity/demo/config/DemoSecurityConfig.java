@@ -38,7 +38,8 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
 			.loginProcessingUrl("/authenticateTheUser") //Login form should POST data to this URL for processing - no need to implement this endpoint, Spring supply it freely
 			.permitAll()//allow everyone to see login page
 			.and()
-			.logout().permitAll();//add logout support (enable endpoint POST /logout)
+			.logout().permitAll()//add logout support (enable endpoint POST /logout)
+			.and().exceptionHandling().accessDeniedPage("/access-denied");
 	}
 
 }
